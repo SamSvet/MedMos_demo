@@ -1,0 +1,131 @@
+// import {
+//   createAsyncThunk,
+//   createSlice,
+//   isAnyOf,
+//   PayloadAction,
+// } from "@reduxjs/toolkit";
+// import { ordersApi } from "../../../api/orders-api";
+// import { strToDate } from "../../../utils/date-utils";
+// import { OrdersRootState } from "../../orders-store";
+// import { ordersListener } from "../../middlewares/orders-listener";
+// import { orderEditData } from "../order-edit-data";
+// import { orderListData } from "../order-list-data";
+// import { orderViewData } from "../order-view-data";
+// import { positionsCreateData } from "../positions-create-data";
+// import { positionsEditData } from "../positions-edit-data";
+
+// export interface LockedOrderState {
+//   order_id: string | null;
+//   timerId: ReturnType<typeof setTimeout> | null;
+// }
+
+// const initialState: LockedOrderState = {
+//   order_id: null,
+//   timerId: null,
+// };
+
+// const prolongOrderLockAsync = createAsyncThunk(
+//   "lockedOrder/prolongLockReq",
+//   (order_id: string) => {
+//     return ordersApi.lockProlong({ orders: { order_id } });
+//   },
+// );
+
+// export const lockedOrderSlice = createSlice({
+//   name: "locked-Order",
+//   initialState,
+//   reducers: {
+//     prolongOrderLock(
+//       state,
+//       action: PayloadAction<{
+//         order_id: string;
+//         locked_till: string | undefined;
+//       }>,
+//     ) {
+//       state.order_id = action.payload.order_id;
+//     },
+//     unlockOrder(state) {
+//       state.order_id = null;
+//       if (state.timerId) {
+//         clearTimeout(state.timerId);
+//       }
+//     },
+//     setTimer(state, action: PayloadAction<ReturnType<typeof setTimeout>>) {
+//       state.timerId = action.payload;
+//     },
+//     clearTimer(state) {
+//       if (state.timerId) {
+//         clearTimeout(state.timerId);
+//       }
+//       state.timerId = null;
+//     },
+//   },
+// });
+
+// ordersListener.startListening({
+//   matcher: isAnyOf(
+//     orderEditData.actions.fill,
+//     positionsEditData.actions.fill,
+//     positionsCreateData.actions.fill,
+//   ),
+//   effect: (action, listenerApi) => {
+//     listenerApi.dispatch(lockedOrderSlice.actions.clearTimer());
+//     listenerApi.dispatch(
+//       lockedOrderSlice.actions.prolongOrderLock({
+//         order_id: action.payload.data.orders?.[0].order_id as string,
+//         locked_till: action.payload.data.orders?.[0].locked_till,
+//       }),
+//     );
+//   },
+// });
+
+// ordersListener.startListening({
+//   matcher: isAnyOf(orderViewData.actions.fill, orderListData.actions.fill),
+//   effect: (action: unknown, listenerApi) => {
+//     // разблокируем кампанию (перестаем отправлять запрос на пролонгацию блокировки)
+//     listenerApi.dispatch(lockedOrderSlice.actions.unlockOrder());
+//   },
+// });
+
+// ordersListener.startListening({
+//   actionCreator: lockedOrderSlice.actions.prolongOrderLock,
+//   effect: (
+//     action: PayloadAction<{
+//       order_id: string;
+//       locked_till: string | undefined;
+//     }>,
+//     listenerApi,
+//   ) => {
+//     if (!action.payload.locked_till) {
+//       return;
+//     }
+
+//     // Устанавливаем таймер для пролонгации блокировки
+//     const halfWay =
+//       (strToDate(action.payload.locked_till)!.valueOf() - Date.now()) / 2;
+//     listenerApi.dispatch(
+//       lockedOrderSlice.actions.setTimer(
+//         setTimeout(() => {
+//           // вызываем пролонгацию блокировки
+//           listenerApi.dispatch(prolongOrderLockAsync(action.payload.order_id));
+//         }, halfWay),
+//       ),
+//     );
+//   },
+// });
+
+// ordersListener.startListening({
+//   actionCreator: prolongOrderLockAsync.fulfilled,
+//   effect: (action, listenerApi) => {
+//     const { lockedorder: currLockedOrderState } =
+//       listenerApi.getState() as OrdersRootState;
+//     if (currLockedOrderState.order_id) {
+//       listenerApi.dispatch(
+//         lockedOrderSlice.actions.prolongOrderLock({
+//           order_id: currLockedOrderState.order_id,
+//           locked_till: action.payload.data.orders?.[0].locked_till,
+//         }),
+//       );
+//     }
+//   },
+// });
