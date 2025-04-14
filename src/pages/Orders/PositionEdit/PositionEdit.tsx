@@ -72,10 +72,6 @@ export const PositionEdit = () => {
   }, [cancel]);
   const handleNoConfirm = useCallback(() => setCancelDlg(false), []);
 
-  useEffect(() => {
-    console.log(positions);
-  }, [positions]);
-
   return (
     <Box mt={2} display="flex">
       <Box flex={1}>

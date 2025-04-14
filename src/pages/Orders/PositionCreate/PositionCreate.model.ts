@@ -4,8 +4,6 @@ import {
   PositionInfo,
   PositionInfoViewModel,
 } from "../../../api/shared/position-info";
-import { getCurrentRefBooks } from "../../../selectors/orders/common-order-selectors";
-import { useOrdersSelector } from "../../../store/orders-store";
 import {
   IPositionAttrBase,
   ValueType,
@@ -13,6 +11,7 @@ import {
 import { PositionAttrError } from "../common/interfaces/position-errors";
 import { usePositionAttributesModel } from "../common/models/position-attributes-model";
 import { ContainerItem } from "../../../api/shared/common/container";
+import { useTranslation } from "react-i18next";
 
 export const usePositionCreateAttributes = (
   updatePositionInfo: (
@@ -22,6 +21,7 @@ export const usePositionCreateAttributes = (
   positionErrors: PositionAttrError | null,
   unsetPositionError: (fieldName: keyof PositionInfo<ListItem>) => void,
 ) => {
+  const { t } = useTranslation();
   const getUpdateFunction = useCallback(
     (attrName: keyof PositionInfo) => (val: ValueType) => {
       if (attrName === "container") {
@@ -87,11 +87,11 @@ export const usePositionCreateAttributes = (
         readOnly: true,
         disabled: true,
         variant: "filled",
-        errorText: "Не доступно для выбора",
+        errorText: t("common.notAvailableField"),
       },
       plan_delivery_dt: { required: false, variant: "filled" },
     };
-  }, []);
+  }, [t]);
 
   const positionAttributes = usePositionAttributesModel(
     position,

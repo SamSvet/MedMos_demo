@@ -1,6 +1,5 @@
 import React from "react";
-import { Paper, Grid, Typography, Divider, Theme, Box } from "@mui/material";
-// import { WithStyles, withStyles, createStyles, Styles } from '@mui/styles';
+import { Paper, Grid, Typography, Divider, Box } from "@mui/material";
 import { format, differenceInCalendarMonths } from "date-fns";
 import ArrowRightAlt from "@mui/icons-material/ArrowRightAlt";
 import { DateRangeMonth } from "./DateRangeMonth";
@@ -12,7 +11,8 @@ import {
   NavigationAction,
 } from "./DateRange.types";
 import { MARKERS } from "./DateRangePicker";
-import { ru } from "date-fns/locale";
+import { ru, enUS } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
 
 // const styles: Styles<any, any> = (theme: Theme) =>
 //   createStyles({
@@ -74,6 +74,10 @@ interface MenuProps {
   };
 }
 
+interface LocaleDict {
+  [locale_code: string]: Locale;
+}
+
 export const DateRangeMenu = React.forwardRef<HTMLElement, MenuProps>(
   function DateRangeMenu(props, ref) {
     const {
@@ -89,6 +93,13 @@ export const DateRangeMenu = React.forwardRef<HTMLElement, MenuProps>(
       helpers,
       handlers,
     } = props;
+    const { t, i18n } = useTranslation();
+
+    const tableLocale: LocaleDict = {
+      ru: ru,
+      us: enUS,
+    };
+
     const { startDate, endDate } = dateRange;
     const canNavigateCloser =
       differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
@@ -98,24 +109,20 @@ export const DateRangeMenu = React.forwardRef<HTMLElement, MenuProps>(
         <Paper elevation={5}>
           <Grid container direction="row" wrap="nowrap">
             <Grid>
-              <Grid
-                container
-                sx={{ padding: "10px 40px" }}
-                // className={classes.header}
-                alignItems="center"
-              >
+              <Grid container sx={{ padding: "10px 40px" }} alignItems="center">
                 <Grid
                   item
                   sx={{
                     flex: 1,
                     textAlign: "center",
                   }}
-                  // className={classes.headerItem}
                 >
                   <Typography variant="subtitle1">
                     {startDate
-                      ? format(startDate, "dd MMMM, yyyy", { locale: ru })
-                      : "Дата начала"}
+                      ? format(startDate, "dd MMMM, yyyy", {
+                          locale: tableLocale[i18n.language] || ru,
+                        })
+                      : t("daterange.startDateLbl")}
                   </Typography>
                 </Grid>
                 <Grid
@@ -124,7 +131,6 @@ export const DateRangeMenu = React.forwardRef<HTMLElement, MenuProps>(
                     flex: 1,
                     textAlign: "center",
                   }}
-                  // className={classes.headerItem}
                 >
                   <ArrowRightAlt color="action" />
                 </Grid>
@@ -134,12 +140,13 @@ export const DateRangeMenu = React.forwardRef<HTMLElement, MenuProps>(
                     flex: 1,
                     textAlign: "center",
                   }}
-                  // className={classes.headerItem}
                 >
                   <Typography variant="subtitle1">
                     {endDate
-                      ? format(endDate, "dd MMMM, yyyy", { locale: ru })
-                      : "Дата окончания"}
+                      ? format(endDate, "dd MMMM, yyyy", {
+                          locale: tableLocale[i18n.language] || ru,
+                        })
+                      : t("daterange.endDateLbl")}
                   </Typography>
                 </Grid>
               </Grid>

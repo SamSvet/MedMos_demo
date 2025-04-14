@@ -3,6 +3,7 @@ import { styled, alpha, useTheme } from "@mui/material";
 import { keyframes } from "@emotion/react";
 import Tooltip from "@mui/material/Tooltip";
 import "./animate.css";
+import { useTranslation } from "react-i18next";
 
 const grow = keyframes({
   from: { "--p": "0;" },
@@ -53,10 +54,14 @@ export const PositionBadge = ({
   size?: number;
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const percentage =
     value > maxValue ? 100 : Math.round((value / maxValue) * 100);
   return (
-    <Tooltip title={`В резерве ${percentage}%`} disableInteractive>
+    <Tooltip
+      title={`${t("table.header.reserved")} ${percentage}%`}
+      disableInteractive
+    >
       <BoxPercentage
         size={size}
         className="animate"

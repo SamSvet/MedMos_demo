@@ -34,8 +34,10 @@ import { DataItem } from "../../../api/shared/common/response-data";
 import { OptionsCreateType } from "../common/components/PositionAttributes/PositionAttributes.interfaces";
 import { useOrderViewAttributes } from "../OrderShow/OrderShow.models";
 import { OrderAside } from "../common/components/OrderAside/OrderAside";
+import { useTranslation } from "react-i18next";
 
 export const PositionCreate = () => {
+  const { t } = useTranslation();
   const { orders } = useOrdersSelector(getPositionCreate);
   const { positions } = useOrdersSelector(getPositionCreateDelta);
   const refBooks = useOrdersSelector(getCurrentRefBooks);
@@ -75,7 +77,6 @@ export const PositionCreate = () => {
               <Avatar sx={{ mt: 1 }}>
                 <BusinessIcon />
               </Avatar>
-
               <Grid container spacing={2} ml={2} maxWidth={796}>
                 <Grid item xs={6}>
                   <FieldElement
@@ -92,25 +93,16 @@ export const PositionCreate = () => {
                 <Grid item xs={6}>
                   <FieldElement attr={positionAttributes.get("color")!} />
                 </Grid>
-
-                {/* <Grid item xs={6}>
-                  <FieldElement attr={positionAttributes.get("container")!} />{" "}
-                </Grid> */}
-
                 <Grid item xs={6}>
                   <FieldElement attr={positionAttributes.get("status")!} />
                 </Grid>
-                {/* <Grid item xs={6}>
-                  <FieldElement attr={positionAttributes.get("container")!} />
-                </Grid> */}
-
                 <Grid item xs={6}>
                   <ContainerField
                     value={
                       (positionAttributes.get("container")
                         ?.value as ContainerItem) || null
                     }
-                    noOptionsText={"Нет опций для выбора"}
+                    noOptionsText={t("common.noOptionTitle")}
                     getDataOptions={
                       positionAttributes.get("container")?.getDataOptions as (
                         substring: string,
@@ -128,10 +120,6 @@ export const PositionCreate = () => {
                     }
                   />
                 </Grid>
-                {/* <Grid item xs={6}>
-                  <ContainerFieldDialog />
-                </Grid> */}
-
                 <Divider sx={{ mb: 2, width: "100%" }} />
                 <FieldElement
                   attr={positionAttributes.get("position_description")!}
@@ -155,7 +143,7 @@ export const PositionCreate = () => {
                 startIcon={<CloseIcon />}
                 onClick={cancel}
               >
-                Отменить
+                {t("common.cancelBtn")}
               </Button>
 
               <Button
@@ -164,7 +152,7 @@ export const PositionCreate = () => {
                 startIcon={<SaveIcon />}
                 onClick={save}
               >
-                Сохранить
+                {t("common.saveBtn")}
               </Button>
             </Stack>
           </CardActions>
@@ -174,16 +162,3 @@ export const PositionCreate = () => {
     </Box>
   );
 };
-
-// <Toolbar variant="regular">
-// <IconButton color="inherit" aria-label="open drawer">
-//   <MenuIcon />
-// </IconButton>
-// <Box sx={{ flexGrow: 1 }} />
-// <IconButton color="inherit">
-//   <SearchIcon />
-// </IconButton>
-// <IconButton color="inherit">
-//   <MoreIcon />
-// </IconButton>
-// </Toolbar>

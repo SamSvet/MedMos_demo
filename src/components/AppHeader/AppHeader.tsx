@@ -7,11 +7,17 @@ import {
   Box,
   Typography,
   useScrollTrigger,
+  ListItemText,
+  Stack,
 } from "@mui/material";
-import { Link, matchPath, useLocation } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import { matchPath, useLocation } from "react-router-dom";
 import AppHeaderMenu from "./AppHeaderMenu";
 import { AppHeader2 } from "./AppHeader2";
 import { AppMenu2 } from "../AppMenu/AppMenu2";
+import RussianLogo from "../LanguageSelect/RussiaFlag";
+import { LanguageSelect } from "../LanguageSelect/LanguageSelect";
 
 interface Props {
   children: React.ReactElement;
@@ -54,34 +60,27 @@ export const AppHeader = () => {
                 src={`${process.env.PUBLIC_URL}/medmos.jpeg`}
                 alt="Bosch Logo"
               />
-              {/* <Typography component="span" variant="h5">
-                Приходы ВСС
-              </Typography> */}
             </Box>
             <Box>
-              {/* <Tabs
-                value={currentPath}
-                aria-label="Navigation Tabs"
-                indicatorColor="secondary"
-                textColor="inherit"
-              >
-                <Tab
-                  label={"Заказы"}
-                  component={Link}
-                  to="/orders"
-                  value="/orders"
-                />
-                <Tab
-                  label={"Календарь"}
-                  component={Link}
-                  to="/long-list"
-                  value="/long-list"
-                />
-              </Tabs> */}
-
               <AppMenu2 />
             </Box>
             <Box display="flex">
+              {/* <TextField
+                id="filled-select-currency"
+                select
+                defaultValue="EUR"
+                fullWidth
+                variant="outlined"
+                sx={{ "& fieldset": { border: "none" } }}
+              >
+                <MenuItem value="RU">
+                  <RussianLogo />
+
+                  <ListItemText primary="RU" />
+                </MenuItem>
+                <MenuItem value="USD">USD</MenuItem>
+              </TextField> */}
+              <LanguageSelect />
               <AppHeaderMenu />
             </Box>
           </Box>

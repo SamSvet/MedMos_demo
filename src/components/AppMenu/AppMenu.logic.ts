@@ -62,7 +62,7 @@ export const useCheckIsActive = () => {
 };
 
 export const useMenuItems = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   return useMemo<IMenuItem[]>(
@@ -118,11 +118,12 @@ export const useMenuItems = () => {
 
 export const useMenuItems2 = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return useMemo<IMenuItems[]>(
     () => [
       {
         id: MenuItemType.Orders,
-        title: "Заказы",
+        title: t("navbar.orders"),
         url: "/orders",
         onClick: () => {
           navigate(cdRoute(AppRoutes.getOrdersList), { replace: true });
@@ -130,7 +131,7 @@ export const useMenuItems2 = () => {
       },
       {
         id: MenuItemType.Calendar,
-        title: "Календарь",
+        title: t("navbar.calendar"),
         url: "/long-list",
         onClick: () => {
           navigate("/long-list", { replace: true });
@@ -138,11 +139,11 @@ export const useMenuItems2 = () => {
       },
       {
         id: MenuItemType.Dictionaries,
-        title: "Справочники",
+        title: t("navbar.dictionary.header"),
         submenu: [
           {
             id: MenuItemType.Dictionaries,
-            title: "Контейнер",
+            title: t("navbar.dictionary.container"),
             url: "/dictionary/container",
             onClick: () => {
               navigate("/long-list", { replace: true });
@@ -150,7 +151,7 @@ export const useMenuItems2 = () => {
           },
           {
             id: MenuItemType.Dictionaries,
-            title: "Цвет",
+            title: t("navbar.dictionary.color"),
             url: "/dictionary/color",
             onClick: () => {
               navigate("/long-list", { replace: true });
@@ -159,6 +160,6 @@ export const useMenuItems2 = () => {
         ],
       },
     ],
-    [navigate],
+    [navigate, t],
   );
 };

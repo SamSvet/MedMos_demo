@@ -1,15 +1,17 @@
 import { CircularProgress, TextField, TextFieldProps } from "@mui/material";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 export const ContainerFieldInput: FC<{
   props: TextFieldProps;
   loading: boolean;
 }> = ({ props, loading }) => {
+  const { t } = useTranslation();
   return (
     <TextField
       {...props}
       variant="filled"
-      label="Контейнер"
+      label={t("table.header.container")}
       // inputProps={{ readOnly: true }}
       // helperText={
       //   value &&

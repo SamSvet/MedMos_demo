@@ -7,6 +7,7 @@ import {
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
+import { useTranslation } from "react-i18next";
 
 export const ContainerDateBtnGroup = ({
   collapsibleCLose,
@@ -17,10 +18,11 @@ export const ContainerDateBtnGroup = ({
   handleAddNewOption: () => void;
   clearField: () => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <InputAdornment position="end">
       <ButtonGroup size="small" aria-label="Small button group">
-        <Tooltip title="Очистить дату">
+        <Tooltip title={t("common.clearBtn")}>
           <IconButton
             size="small"
             onClick={(e) => {
@@ -31,7 +33,7 @@ export const ContainerDateBtnGroup = ({
             <ClearIcon fontSize="small" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Свернуть">
+        <Tooltip title={t("common.collapseBtn")}>
           <IconButton
             size="small"
             onClick={(e) => {
@@ -42,7 +44,7 @@ export const ContainerDateBtnGroup = ({
             <KeyboardArrowUpIcon fontSize="small" />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Добавить">
+        <Tooltip title={t("common.addOptionTitle")}>
           <IconButton
             size="small"
             color="secondary"

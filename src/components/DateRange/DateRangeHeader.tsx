@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Grid,
   IconButton,
@@ -10,6 +10,7 @@ import {
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import { setMonth, getMonth, setYear, getYear } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface HeaderProps {
   date: Date;
@@ -37,21 +38,6 @@ interface HeaderProps {
 //   }),
 // );
 
-const MONTHS = [
-  "Январь",
-  "Февраль",
-  "Март",
-  "Апрель",
-  "Май",
-  "Июнь",
-  "Июль",
-  "Август",
-  "Сентябрь",
-  "Октябрь",
-  "Ноябрь",
-  "Декабрь",
-];
-
 const generateYears = (relativeTo: Date, count: number) => {
   const half = Math.floor(count / 2);
   return Array(count)
@@ -67,6 +53,25 @@ export const DateRangeHeader: React.FunctionComponent<HeaderProps> = ({
   onClickNext,
   onClickPrevious,
 }) => {
+  const { t } = useTranslation();
+  const MONTHS = useMemo(
+    () => [
+      t("month.january"),
+      t("month.february"),
+      t("month.march"),
+      t("month.april"),
+      t("month.may"),
+      t("month.june"),
+      t("month.july"),
+      t("month.august"),
+      t("month.september"),
+      t("month.october"),
+      t("month.november"),
+      t("month.december"),
+    ],
+    [t],
+  );
+
   //   const classes = useStyles();
   const handleMonthChange = (event: SelectChangeEvent<number>) => {
     // event.preventDefault();

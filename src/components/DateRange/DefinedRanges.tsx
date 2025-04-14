@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { List, ListItemButton, ListItemText } from "@mui/material";
 import { DefinedRange, DateRange } from "./DateRange.types";
 import { isSameDay } from "date-fns";
 

@@ -9,9 +9,9 @@ import { AppContent } from "./components/AppContent/AppContent";
 import { AppHeader } from "./components/AppHeader/AppHeader";
 import { AppMainLayout } from "./components/AppMainLayout/AppMainLayout";
 import { AppContextProvider } from "./components/AppContextProvider/AppContextProvider";
-import { ru } from "date-fns/locale";
-import { AppHeader2 } from "./components/AppHeader/AppHeader2";
+import { ru, enUS } from "date-fns/locale";
 import "./i18n";
+import { useTranslation } from "react-i18next";
 
 // function App() {
 //   return (
@@ -34,18 +34,33 @@ import "./i18n";
 //   );
 // }
 
-const App = () => (
-  <ReduxProvider store={ordersStore} context={OrdersContext}>
-    <BrowserRouter>
-      <StableNavigateContextProvider>
-        <AppContextProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
-            <AppMainLayout Header={AppHeader} Content={AppContent} />
-          </LocalizationProvider>
-        </AppContextProvider>
-      </StableNavigateContextProvider>
-    </BrowserRouter>
-  </ReduxProvider>
-);
+interface LocaleDict {
+  [locale_code: string]: Locale;
+}
+
+const App = () => {
+  const { i18n } = useTranslation();
+  const tableLocale: LocaleDict = {
+    ru: ru,
+    us: enUS,
+  };
+
+  return (
+    <ReduxProvider store={ordersStore} context={OrdersContext}>
+      <BrowserRouter>
+        <StableNavigateContextProvider>
+          <AppContextProvider>
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              locale={tableLocale[i18n.language] || ru}
+            >
+              <AppMainLayout Header={AppHeader} Content={AppContent} />
+            </LocalizationProvider>
+          </AppContextProvider>
+        </StableNavigateContextProvider>
+      </BrowserRouter>
+    </ReduxProvider>
+  );
+};
 
 export default App;

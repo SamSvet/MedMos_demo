@@ -52,7 +52,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Text,
             id: "position_name",
-            label: "Артикул по РУ",
+            label: t("table.header.positionName"),
             update: getUpdateFunction && getUpdateFunction("position_name"),
             value: position.position_name,
             error: Boolean(positionErrors?.position_name?.isError),
@@ -65,7 +65,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Ref,
             id: "color",
-            label: "Цвет",
+            label: t("table.header.color"),
             update: getUpdateFunction && getUpdateFunction("color"),
             value: position.color,
             optionSettings: REF_OPTIONS_SETINGS,
@@ -81,7 +81,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Text,
             id: "position_description",
-            label: "Описание позиции",
+            label: t("table.header.positionDescription"),
             update:
               getUpdateFunction && getUpdateFunction("position_description"),
             value: position.position_description,
@@ -95,7 +95,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Ref,
             id: "model_id",
-            label: "Модельный номер",
+            label: t("table.header.modelID"),
             update: getUpdateFunction && getUpdateFunction("model_id"),
             value: position.model_id,
             optionSettings: REF_OPTIONS_SETINGS,
@@ -111,8 +111,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Number,
             id: "count",
-            label: "Количество позиций",
-
+            label: t("table.header.positionCount"),
             update: getUpdateFunction && getUpdateFunction("count"),
             value: position.count,
             error: Boolean(positionErrors?.count?.isError),
@@ -129,7 +128,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Number,
             id: "reserved_count",
-            label: "Зарезервированно позиций",
+            label: t("table.header.reserved"),
             update: getUpdateFunction && getUpdateFunction("reserved_count"),
             value: position.reserved_count,
             error: Boolean(positionErrors?.count?.isError),
@@ -146,7 +145,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Container,
             id: "container",
-            label: "Контейнер",
+            label: t("table.header.container"),
             update: getUpdateFunction && getUpdateFunction("container"),
             value: position.container ? position.container[0] : [],
             optionSettings: CONTAINERS_OPTIONS_SETTINGS,
@@ -172,7 +171,7 @@ export const usePositionAttributesModel = (
           {
             type: AttrType.Ref,
             id: "status",
-            label: "Статус",
+            label: t("table.header.status"),
             update: getUpdateFunction && getUpdateFunction("status"),
             value: position.status,
             optionSettings: REF_OPTIONS_SETINGS,
@@ -227,6 +226,7 @@ export const usePositionAttributesModel = (
       positionErrors?.position_name?.isError,
       positionErrors?.status?.errorText,
       positionErrors?.status?.isError,
+      t,
     ],
   );
 };

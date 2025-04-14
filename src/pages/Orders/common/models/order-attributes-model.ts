@@ -59,7 +59,7 @@ export const useOrderAttributesModel = (
         {
           type: AttrType.Text,
           id: "order_name",
-          label: "Имя заказа",
+          label: t("table.header.order"),
           update: getUpdateFunction && getUpdateFunction("order_name"),
           error: Boolean(orderErrors?.order_name?.isError),
           errorText: orderErrors?.order_name?.errorText,
@@ -73,7 +73,7 @@ export const useOrderAttributesModel = (
         {
           type: AttrType.User,
           id: "order_manager",
-          label: "Менеджер",
+          label: t("order.edit.manager"),
           update: getUpdateFunction && getUpdateFunction("order_manager"),
           error: Boolean(orderErrors?.order_manager?.isError),
           errorText: orderErrors?.order_manager?.errorText,
@@ -88,7 +88,7 @@ export const useOrderAttributesModel = (
         "created",
         {
           type: AttrType.Text,
-          id: "created",
+          id: t("order.show.createdTitle"),
           label: t("campaigns.campaignFields.created"),
           error: false,
           value: formatDate(order.created),
@@ -99,7 +99,7 @@ export const useOrderAttributesModel = (
         "updated_by",
         {
           type: AttrType.Text,
-          id: "updated_by",
+          id: t("order.show.updatedTitle"),
           label: t("campaigns.campaignFields.updated_by"),
           error: false,
           value: updatedByValueComputed,
@@ -110,7 +110,7 @@ export const useOrderAttributesModel = (
         "updated",
         {
           type: AttrType.Text,
-          id: "updated",
+          id: t("order.edti.updated"),
           label: t("campaigns.campaignFields.updated"),
           error: false,
           value: formatDate(order.updated),
@@ -123,7 +123,7 @@ export const useOrderAttributesModel = (
         {
           type: AttrType.Descr,
           id: "description",
-          label: "Описание",
+          label: t("order.show.descriptionTitle"),
           value: order.description || "",
           error: Boolean(orderErrors?.description?.isError),
           errorText: orderErrors?.description?.errorText,

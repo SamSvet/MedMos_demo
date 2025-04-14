@@ -14,6 +14,7 @@ import { DateRange, NavigationAction, DefinedRange } from "./DateRange.types";
 import { getValidatedMonths, parseOptionalDate } from "./DateRange.utils";
 import { defaultRanges } from "./DateRange.defaults";
 import { DateRangeMenu } from "./DateRangeMenu";
+import { useTranslation } from "react-i18next";
 
 type Marker = symbol;
 
@@ -35,6 +36,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = (
   props: DateRangePickerProps,
 ) => {
   const today = new Date();
+  const { t } = useTranslation();
 
   const {
     open,
@@ -42,7 +44,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = (
     initialDateRange,
     minDate,
     maxDate,
-    definedRanges = defaultRanges,
+    definedRanges = defaultRanges(t),
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));

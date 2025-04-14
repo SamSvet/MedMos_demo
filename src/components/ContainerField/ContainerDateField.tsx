@@ -12,6 +12,7 @@ import {
 import { ContainerItem } from "../../api/shared/common/container";
 import { ErrorToolTip } from "../ToolTip/ErrorToolTip";
 import { ContainerDateBtnGroup } from "./ContainerDateBtnGroup";
+import { useTranslation } from "react-i18next";
 
 export default function ContainerDateField({
   collapsibleCLose,
@@ -28,6 +29,7 @@ export default function ContainerDateField({
   badAttributes: ContainerBadAttributes<ContainerItemSelect> | null;
   clearField: () => void;
 }) {
+  const { t } = useTranslation();
   const anchorRef = useRef<HTMLInputElement>(null);
   const [calendarVisible, setCalendarVisible] = useState(false);
 
@@ -65,7 +67,7 @@ export default function ContainerDateField({
               .reverse()
               .join(".") || ""
           }
-          label="плановая дата доставки"
+          label={t("table.header.deliveryDate")}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();

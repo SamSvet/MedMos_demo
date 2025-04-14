@@ -1,5 +1,5 @@
 import { type MRT_ColumnDef } from "material-react-table";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ColorBox } from "../../components/ColorBox/ColorBox";
 import {
@@ -55,6 +55,36 @@ export const useOrdersColumns = <
   const start_plan_delivery_dt = filtersMap.get("start_plan_delivery_dt")!;
   const end_plan_delivery_dt = filtersMap.get("end_plan_delivery_dt")!;
   // const orderName = filtersMap.get("order_name")!;
+
+  const start_dt = useMemo(
+    () => ({
+      ...start_plan_delivery_dt,
+      value: (
+        filters?.[start_plan_delivery_dt.entity] as {
+          [key: string]: Date;
+        }
+      )?.[start_plan_delivery_dt.fieldName],
+      onChange: () => {
+        return true;
+      },
+    }),
+    [filters, start_plan_delivery_dt],
+  );
+
+  const end_dt = useMemo(
+    () => ({
+      ...end_plan_delivery_dt,
+      value: (
+        filters?.[end_plan_delivery_dt.entity] as {
+          [key: string]: Date;
+        }
+      )?.[end_plan_delivery_dt.fieldName],
+      onChange: () => {
+        return true;
+      },
+    }),
+    [end_plan_delivery_dt, filters],
+  );
 
   const handleChange = useCallback(
     (
@@ -127,7 +157,7 @@ export const useOrdersColumns = <
       // },
       {
         accessorKey: "order.order_name",
-        header: "Заказ",
+        header: t("table.header.order"),
         size: 150,
         minSize: 120,
         maxSize: 300,
@@ -184,7 +214,11 @@ export const useOrdersColumns = <
         Cell: ({ row, cell }) => {
           return (
             <Tooltip
-              title={<>Просмотр заказа {row.original.order.order_name}</>}
+              title={
+                <>
+                  {t("table.body.viewOrder")} {row.original.order.order_name}
+                </>
+              }
               disableInteractive
             >
               <Link
@@ -230,13 +264,13 @@ export const useOrdersColumns = <
 
       {
         accessorKey: "order.description",
-        header: "Описание",
+        header: t("table.header.description"),
         size: 300,
         enableGrouping: false,
       },
       {
         accessorKey: "position.position_name",
-        header: "Артикул по РУ",
+        header: t("table.header.positionName"),
         size: 150,
         Filter: () => (
           <FilterTextField
@@ -252,7 +286,7 @@ export const useOrdersColumns = <
       },
       {
         accessorKey: "position.model_id",
-        header: "Модельный номер",
+        header: t("table.header.modelID"),
         size: 150,
         Filter: () => (
           <FilterRefField
@@ -269,7 +303,7 @@ export const useOrdersColumns = <
 
       {
         accessorKey: "position.color",
-        header: "Цвет",
+        header: t("table.header.color"),
         size: 150,
         Cell: ({ cell }) => {
           return (
@@ -294,7 +328,7 @@ export const useOrdersColumns = <
       {
         accessorKey: "position.container",
         // accessorFn: (originalRow) => "qweasd",
-        header: "Контейнер",
+        header: t("table.header.container"),
         size: 150,
         filterVariant: "select",
         // filterSelectOptions: (
@@ -336,7 +370,7 @@ export const useOrdersColumns = <
         //   originalRow.container
         //     ? originalRow.container.plan_delivery_dt?.split("T")[0]
         //     : "",
-        header: "Дата доставки",
+        header: t("table.header.deliveryDate"),
         size: 280,
         enableGrouping: false,
         enableResizing: false,
@@ -355,28 +389,8 @@ export const useOrdersColumns = <
         Filter: () => (
           <FilterDateRangeField
             onChange={handleChangeDateRange}
-            start_dt={{
-              ...start_plan_delivery_dt,
-              value: (
-                filters?.[start_plan_delivery_dt.entity] as {
-                  [key: string]: Date;
-                }
-              )?.[start_plan_delivery_dt.fieldName],
-              onChange: () => {
-                return true;
-              },
-            }}
-            end_dt={{
-              ...end_plan_delivery_dt,
-              value: (
-                filters?.[end_plan_delivery_dt.entity] as {
-                  [key: string]: Date;
-                }
-              )?.[end_plan_delivery_dt.fieldName],
-              onChange: () => {
-                return true;
-              },
-            }}
+            start_dt={start_dt}
+            end_dt={end_dt}
           />
           //   <Stack
           //     direction="row"
@@ -458,7 +472,7 @@ export const useOrdersColumns = <
       // },
       {
         accessorKey: "position.status",
-        header: "Статус",
+        header: t("table.header.status"),
         size: 150,
         Filter: () => (
           <FilterRefField
@@ -474,7 +488,7 @@ export const useOrdersColumns = <
       },
       {
         accessorKey: "position.count",
-        header: "Всего",
+        header: t("table.header.quantity"),
         size: 110,
         minSize: 60,
         maxSize: 120,
@@ -487,7 +501,7 @@ export const useOrdersColumns = <
       },
       {
         accessorKey: "position.reserved_count",
-        header: "В резерве",
+        header: t("table.header.reserved"),
         size: 120,
         minSize: 60,
         maxSize: 120,
@@ -500,6 +514,7 @@ export const useOrdersColumns = <
       },
     ],
     [
+      t,
       viewOrder,
       orderName,
       filters,
@@ -509,8 +524,8 @@ export const useOrdersColumns = <
       colorFilter,
       containerFilter,
       handleChangeDateRange,
-      start_plan_delivery_dt,
-      end_plan_delivery_dt,
+      start_dt,
+      end_dt,
       statusFilter,
     ],
   );

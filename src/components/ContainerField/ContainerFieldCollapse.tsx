@@ -6,6 +6,7 @@ import {
   ContainerItemSelect,
 } from "./ContainerField.logic";
 import { ErrorToolTip } from "../ToolTip/ErrorToolTip";
+import { useTranslation } from "react-i18next";
 
 export const ContainerFieldCollapse = ({
   value,
@@ -30,6 +31,7 @@ export const ContainerFieldCollapse = ({
   badAttributes: ContainerBadAttributes<ContainerItemSelect> | null;
   clearField: (key: keyof ContainerItemSelect) => void;
 }) => {
+  const { t } = useTranslation();
   return (
     <Collapse
       in={isOpen}
@@ -66,7 +68,7 @@ export const ContainerFieldCollapse = ({
             autoFocus
             value={value?.name || ""}
             onChange={handleTextChange}
-            label="имя"
+            label={t("table.header.container")}
             type="text"
             variant="standard"
             error={!!badAttributes?.name}

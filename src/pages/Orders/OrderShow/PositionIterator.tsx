@@ -16,6 +16,8 @@ import {
   useTheme,
   Tooltip,
 } from "@mui/material";
+import Fab from "@mui/material/Fab";
+import { ArrowBack } from "@mui/icons-material";
 import { PositionInfoViewModel } from "../../../api/shared/position-info";
 import { ColorBox } from "../../../components/ColorBox/ColorBox";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
@@ -23,6 +25,7 @@ import { useState, forwardRef } from "react";
 import IconButton from "@mui/material/IconButton";
 import CallSplitIcon from "@mui/icons-material/CallSplit";
 import { PositionBadge } from "./PositionBadge";
+import { useTranslation } from "react-i18next";
 
 export const PositionIteratorInfo = ({
   pos,
@@ -228,6 +231,7 @@ export const PositionIteratorItem = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
+  const { t } = useTranslation();
   return (
     <Grid
       container
@@ -253,19 +257,30 @@ export const PositionIteratorItem = ({
       <Grid item xs={10}>
         <Grid container>
           <Grid item xs={12}>
-            <Typography variant="caption">Артикул по РУ: </Typography>
+            <Typography variant="caption">
+              {t("table.header.positionName")}:{" "}
+            </Typography>
             <Chip size="small" label={position.position_name} />
-            <Typography variant="caption"> Модельный номер:</Typography>
+            <Typography variant="caption">
+              {" "}
+              {t("table.header.modelID")}:
+            </Typography>
             <Chip size="small" label={position.model_id?.name} />
           </Grid>
           <Grid item xs={12}>
             {position.container && position.container.length > 0 && (
               <>
-                <Typography variant="caption"> Контейнер:</Typography>
+                <Typography variant="caption">
+                  {" "}
+                  {t("table.header.container")}:
+                </Typography>
                 <Chip size="small" label={position.container![0].name} />
               </>
             )}
-            <Typography variant="caption"> Цвет:</Typography>
+            <Typography variant="caption">
+              {" "}
+              {t("table.header.color")}:
+            </Typography>
             <Chip
               size="small"
               label={position.color?.name}
@@ -276,9 +291,15 @@ export const PositionIteratorItem = ({
                   "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px ",
               }}
             />
-            <Typography variant="caption"> В резерве:</Typography>
+            <Typography variant="caption">
+              {" "}
+              {t("table.header.reserved")}:
+            </Typography>
             <Chip size="small" label={position.reserved_count || 0} />
-            <Typography variant="caption"> Свободно:</Typography>
+            <Typography variant="caption">
+              {" "}
+              {t("table.header.remain")}:
+            </Typography>
             <Chip
               size="small"
               label={(position.count || 0) - (position.reserved_count || 0)}
@@ -297,12 +318,12 @@ export const PositionIteratorItem = ({
           alignItems="center"
           sx={{ visibility: `${isVisible ? "unset" : "hidden"}` }}
         >
-          <Tooltip title="Создание новой подгруппы" disableInteractive>
+          <Tooltip title={t("order.show.splitOrderBtn")} disableInteractive>
             <IconButton onClick={() => clickEditHandler(position)}>
               <CallSplitIcon fontSize="inherit" />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Зарезервировать" disableInteractive>
+          <Tooltip title={t("order.show.reserveBtn")} disableInteractive>
             <IconButton onClick={() => clickReserveHandler(position)}>
               <HowToRegIcon fontSize="inherit" />
             </IconButton>

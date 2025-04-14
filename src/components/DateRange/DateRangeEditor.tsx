@@ -37,6 +37,7 @@ import {
 } from "./DateRange.utils";
 import { defaultRanges } from "./DateRange.defaults";
 import { DateRangeMenu } from "./DateRangeMenu";
+import { useTranslation } from "react-i18next";
 
 type Marker = symbol;
 
@@ -81,13 +82,13 @@ interface DateRangeEditorProps {
 
 export const DateRangeEditor: React.FC<DateRangeEditorProps> = (props) => {
   const today = new Date();
-
+  const { t } = useTranslation();
   const {
     dateRange,
     onChange,
     minDate,
     maxDate,
-    definedRanges = defaultRanges,
+    definedRanges = defaultRanges(t),
     mask = "__.__.____",
     dateInputDelimeter = ".",
     startInput,
@@ -116,14 +117,16 @@ export const DateRangeEditor: React.FC<DateRangeEditorProps> = (props) => {
   const anchorRef = React.useRef<HTMLElement>();
   const isOpen = Boolean(anchorEl);
 
-  // useEffect(() => {
-  //   console.log(anchorRef);
-  // }, [anchorRef]);
-
   const [dateFrom, setDateFrom] = useState(
     FormatDateForInput(dateRange.startDate),
   );
   const [dateTo, setDateTo] = useState(FormatDateForInput(dateRange.endDate));
+
+  useEffect(() => {
+    setDateFrom(() => FormatDateForInput(dateRange.startDate));
+    setDateTo(() => FormatDateForInput(dateRange.endDate));
+  }, [dateRange]);
+
   const [dateFromValidation, setDateFromValidation] = useState("");
   const [dateToValidation, setDateToValidation] = useState("");
 
@@ -147,17 +150,20 @@ export const DateRangeEditor: React.FC<DateRangeEditorProps> = (props) => {
     setOpenDateRangePicker(false);
   };
 
-  const onModelUpdate = (newValue: DateRange, dispatch = true) => {
-    setDaterange(newValue);
-    const dfrom = FormatDateForInput(newValue.startDate);
-    const dto = FormatDateForInput(newValue.endDate);
-    setDateFrom(() => dfrom);
-    setDateTo(() => dto);
-    setDateFromValidation(() => (dfrom.length < 1 ? "Required" : ""));
-    setDateToValidation(() => (dto.length < 1 ? "Required" : ""));
+  const onModelUpdate = useCallback(
+    (newValue: DateRange, dispatch = true) => {
+      setDaterange(newValue);
+      const dfrom = FormatDateForInput(newValue.startDate);
+      const dto = FormatDateForInput(newValue.endDate);
+      setDateFrom(() => dfrom);
+      setDateTo(() => dto);
+      setDateFromValidation(() => (dfrom.length < 1 ? "Required" : ""));
+      setDateToValidation(() => (dto.length < 1 ? "Required" : ""));
 
-    dispatch && onChange(newValue);
-  };
+      dispatch && onChange(newValue);
+    },
+    [onChange],
+  );
 
   const parseFromDate = (event: any) => {
     const newValue = event.target.value;
@@ -335,7 +341,10 @@ export const DateRangeEditor: React.FC<DateRangeEditorProps> = (props) => {
 
             endAdornment: (
               <InputAdornment position="end" sx={{ marginLeft: "2px" }}>
-                <Tooltip title={"Очистить фильтр"} disableInteractive>
+                <Tooltip
+                  title={t("daterange.clearFilterBtn")}
+                  disableInteractive
+                >
                   <IconButton
                     size="small"
                     sx={{ padding: "0px" }}
@@ -367,7 +376,10 @@ export const DateRangeEditor: React.FC<DateRangeEditorProps> = (props) => {
             readOnly: endInput?.readonly,
             endAdornment: (
               <InputAdornment position="end" sx={{ marginLeft: "2px" }}>
-                <Tooltip title={"Очистить фильтр"} disableInteractive>
+                <Tooltip
+                  title={t("daterange.clearFilterBtn")}
+                  disableInteractive
+                >
                   <IconButton
                     size="small"
                     sx={{ padding: "0px" }}

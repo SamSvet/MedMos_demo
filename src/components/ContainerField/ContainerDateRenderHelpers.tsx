@@ -2,6 +2,7 @@ import { FC, HTMLAttributes, useEffect } from "react";
 import { ContainerItemSelect } from "./ContainerField.logic";
 import { AutocompleteRenderGroupParams, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import { useTranslation } from "react-i18next";
 export const ContainerDateRenderOption = ({
   props,
   option,
@@ -42,12 +43,13 @@ export const ContainerDateRenderGroup = ({
 }: {
   props: AutocompleteRenderGroupParams;
 }) => {
+  const { t } = useTranslation();
   return (
     <li key={props.key}>
       <GroupHeader>
         {props.group}
         <Typography variant="caption" gutterBottom sx={{ display: "block" }}>
-          Плановая дата доставки
+          {t("table.header.deliveryDate")}
         </Typography>
       </GroupHeader>
       <GroupItems>{props.children}</GroupItems>

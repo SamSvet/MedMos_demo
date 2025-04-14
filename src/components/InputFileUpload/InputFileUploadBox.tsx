@@ -4,6 +4,7 @@ import { blue, red } from "@mui/material/colors";
 import VisuallyHiddenInput from "./VisuallyHiddentInput";
 import UploadFileOutlinedIcon from "@mui/icons-material/UploadFileOutlined";
 import { OrderAttrError } from "../../pages/Orders/common/interfaces/order-errors";
+import { useTranslation } from "react-i18next";
 
 export type InputFileUploadProps = {
   // onUpload: (data: unknown) => void;
@@ -22,11 +23,12 @@ export type UploadRef = {
 };
 
 const FileInfo = ({ file }: { file: File | null }) => {
+  const { t } = useTranslation();
   return file ? (
     <Grid container>
       <Grid item xs={2}>
         <Typography variant="caption" sx={{ textTransform: "none" }}>
-          Имя:
+          {t("order.create.nameField")}:
         </Typography>
       </Grid>
       <Grid item xs={10}>
@@ -36,7 +38,7 @@ const FileInfo = ({ file }: { file: File | null }) => {
       </Grid>
       <Grid item xs={2}>
         <Typography variant="caption" sx={{ textTransform: "none" }}>
-          Размер:
+          {t("order.create.sizeField")}:
         </Typography>
       </Grid>
       <Grid item xs={10}>
@@ -46,7 +48,7 @@ const FileInfo = ({ file }: { file: File | null }) => {
       </Grid>
       <Grid item xs={2}>
         <Typography variant="caption" sx={{ textTransform: "none" }}>
-          Изменен:
+          {t("order.create.modateField")}:
         </Typography>
       </Grid>
       <Grid item xs={10}>
@@ -58,7 +60,7 @@ const FileInfo = ({ file }: { file: File | null }) => {
   ) : (
     <Grid container>
       <Grid item xs={12}>
-        <Typography variant="caption">Выберите файл</Typography>
+        <Typography variant="caption">{t("order.create.fileBtn")}</Typography>
       </Grid>
     </Grid>
   );
@@ -182,31 +184,4 @@ export default function InputFileUploadBox({
       </Collapse>
     </>
   );
-}
-
-{
-  /* <Grid container alignItems={"center"}>
-          <Grid item xs={11}>
-            
-          </Grid>
-        </Grid> */
-}
-{
-  /* <Stack
-direction="column-reverse"
-justifyContent="flex-end"
-alignItems="center"
-spacing={2}
->
-<FileInfo file={file} />
-<UploadFileOutlinedIcon
-  sx={{
-    opacity: 0.03,
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-  }}
-/>
-</Stack> */
 }

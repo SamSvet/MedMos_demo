@@ -19,6 +19,7 @@ import {
   GroupHeader,
   GroupItems,
 } from "./ContainerDateRenderHelpers";
+import { useTranslation } from "react-i18next";
 
 function sleep(duration: number): Promise<void> {
   return new Promise<void>((resolve) => {
@@ -62,6 +63,7 @@ export default function ContainerField({
     optionName: ContainerItemSelect,
   ) => Promise<OptionsCreateType<ContainerItemSelect>>;
 }) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [loadingNewOption, setLoadingNewOption] = useState(false);
 
@@ -200,7 +202,7 @@ export default function ContainerField({
           }
           return option.name;
         }}
-        groupBy={(option) => "Имя"}
+        groupBy={(option) => t("table.header.container")}
         renderGroup={(params) => (
           <ContainerDateRenderGroup key={params.key} props={params} />
         )}
@@ -226,7 +228,7 @@ export default function ContainerField({
             filtered.push({
               id: "",
               inputValue: inputValue,
-              name: `Добавить "${params.inputValue}"`,
+              name: `${t("common.addOptionTitle")} "${params.inputValue}"`,
               plan_delivery_dt: "",
             });
           }

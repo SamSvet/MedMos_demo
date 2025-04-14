@@ -28,8 +28,10 @@ import {
 } from "@mui/material";
 import { PaperComponent } from "../common/components/PaperComponent/PaperComponent";
 import { FieldElement } from "../common/components/OrderAttributes/OrderAttributes";
+import { useTranslation } from "react-i18next";
 
 export default function OrderEdit() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const [cancelDlg, setCancelDlg] = useState(false);
   const { bad_attributes } = useOrdersSelector(getAdditionalOrderEditData);
@@ -56,7 +58,7 @@ export default function OrderEdit() {
       aria-labelledby="draggable-dialog-title"
     >
       <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-        Редактирование заказа
+        {t("order.edit.title")}
       </DialogTitle>
       <Divider />
       <DialogContent>
@@ -71,9 +73,9 @@ export default function OrderEdit() {
       <Divider />
       <DialogActions>
         <Button autoFocus onClick={handleOrderClose}>
-          Отмена
+          {t("common.cancelBtn")}
         </Button>
-        <Button onClick={handleOrderSave}>Редактировать</Button>
+        <Button onClick={handleOrderSave}>{t("common.editBtn")}</Button>
       </DialogActions>
     </Dialog>
   );

@@ -2,6 +2,7 @@ import { useState, ChangeEvent } from "react";
 import { useOrdersSelector } from "../../../store/orders-store";
 import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from "@mui/material/styles";
+
 import {
   Box,
   Card,
@@ -12,6 +13,7 @@ import {
   Divider,
   Button,
   Stack,
+  Fab,
 } from "@mui/material";
 import { useOrderValidation } from "../common/hooks/useOrderValidation";
 import { useOrderViewAttributes } from "./OrderShow.models";
@@ -25,6 +27,9 @@ import { PositionIteratorRef } from "./PositionIterator";
 import { useOrderShowActions } from "./hooks/useOrderShowActions";
 import { Outlet } from "react-router-dom";
 import usePrevious, { usePrevious2 } from "../../../hooks/usePrevious";
+import { useBackToList } from "../common/hooks/useBackToList";
+import { ArrowBack } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -50,6 +55,7 @@ const TabPanel = (props: TabPanelProps) => {
 
 export const OrderShow = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [tabValue, setTabValue] = useState(0);
   const tabValuePrev = usePrevious2(tabValue);
@@ -64,7 +70,7 @@ export const OrderShow = () => {
   const { orders, positions } = useOrdersSelector(getOrderView);
 
   const { bad_attributes } = useOrdersSelector(getAdditionalOrderViewData);
-  //   const handleBackToList = useBackToList();
+
   const {
     showEdit: linkHandler,
     showCreatePositions,
@@ -101,7 +107,7 @@ export const OrderShow = () => {
                   onClick={showCreatePositions}
                   startIcon={<AddIcon />}
                 >
-                  Добавить позицию
+                  {t("order.show.addPositionBtn")}
                 </Button>
               </Stack>
               <Tabs
@@ -139,41 +145,3 @@ export const OrderShow = () => {
     </>
   );
 };
-
-{
-  /* <PositionIterator
-                    positions={positionsTabData.get(tab) || []}
-                    clickHandler={showPositionsList}
-                  /> */
-}
-// const [cancelDlg, setCancelDlg] = useState(false);
-
-//   const { t } = useTranslation();
-
-//   const { positions } = useOrdersSelector(getPositionEdit);
-//   const { orders } = useOrdersSelector(getOrderEdit);
-//   const { position, updatePositionInfo } = useDraftPositionData(positions?.[0]);
-
-//   useEffect(() => {
-//     console.log(positions);
-//   }, [positions]);
-//   const { save, cancel } = usePositionEditActions(orders[0], position);
-
-//   const { bad_attributes } = useOrdersSelector(getAdditionalPositionsEditData);
-
-//   const { positionErrors, unsetPositionError } =
-//     usePositionValidation(bad_attributes);
-
-//   const { positionAttributes } = usePositionAttrModel(
-//     updatePositionInfo,
-//     position,
-//     positionErrors,
-//     unsetPositionError,
-//   );
-
-//   const handleCancel = useCallback(() => setCancelDlg(true), []);
-//   const handleConfirm = useCallback(() => {
-//     setCancelDlg(false);
-//     cancel();
-//   }, [cancel]);
-//   const handleNoConfirm = useCallback(() => setCancelDlg(false), []);

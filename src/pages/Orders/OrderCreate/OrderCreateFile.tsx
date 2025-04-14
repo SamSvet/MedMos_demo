@@ -18,17 +18,13 @@ import { Box, Divider } from "@mui/material";
 import { PaperComponent } from "../common/components/PaperComponent/PaperComponent";
 import InputFileUpload from "../../../components/InputFileUpload/InputFileUploadBox";
 import InputFileUploadButton from "../../../components/InputFileUpload/InputFileUploadButton";
+import { useTranslation } from "react-i18next";
 
 export const OrderCreateFile = () => {
+  const { t } = useTranslation();
   const { bad_attributes } = useOrdersSelector(getAdditionalOrderCreateData);
-  useEffect(() => {
-    console.log(bad_attributes);
-  }, [bad_attributes]);
-  const { orderErrors, unsetOrderError } = useOrderValidation(bad_attributes);
 
-  useEffect(() => {
-    console.log(orderErrors);
-  }, [orderErrors]);
+  const { orderErrors, unsetOrderError } = useOrderValidation(bad_attributes);
 
   const [open, setOpen] = useState(true);
   const [file, setFile] = useState<File | null>(null);
@@ -63,7 +59,7 @@ export const OrderCreateFile = () => {
       aria-labelledby="draggable-dialog-title"
     >
       <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-        Новый заказ
+        {t("order.create.title")}
       </DialogTitle>
       <Divider />
       <DialogContent>
@@ -78,10 +74,10 @@ export const OrderCreateFile = () => {
       <Divider />
       <DialogActions>
         <Button autoFocus onClick={close}>
-          Отмена
+          {t("common.cancelBtn")}
         </Button>
         <Button disabled={Boolean(!file)} onClick={saveFile}>
-          Создать
+          {t("common.saveBtn")}
         </Button>
       </DialogActions>
     </Dialog>

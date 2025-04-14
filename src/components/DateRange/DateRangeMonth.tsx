@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Paper, Grid, Typography, PaperProps, styled } from "@mui/material";
-// import { createStyles, WithStyles, withStyles, Styles } from "@mui/styles";
 import {
   getDate,
   isSameMonth,
@@ -19,8 +18,7 @@ import {
 import { DateRangeHeader } from "./DateRangeHeader";
 import { DateRangeDay } from "./DateRangeDay";
 import { NavigationAction, DateRange } from "./DateRange.types";
-
-const WEEK_DAYS = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+import { useTranslation } from "react-i18next";
 
 // const styles: Styles<any, any> = (theme: Theme) =>
 //   createStyles({
@@ -100,6 +98,29 @@ export const DateRangeMonth: React.FunctionComponent<MonthProps> = (props) => {
   } = props;
 
   const [back, forward] = props.navState;
+  const { t, i18n } = useTranslation();
+  const WEEK_DAYS = React.useMemo(() => {
+    if (i18n.language !== "ru") {
+      return [
+        t("weekday.sunday.short"),
+        t("weekday.monday.short"),
+        t("weekday.tuesday.short"),
+        t("weekday.wednsday.short"),
+        t("weekday.thursday.short"),
+        t("weekday.friday.short"),
+        t("weekday.saturday.short"),
+      ];
+    }
+    return [
+      t("weekday.monday.short"),
+      t("weekday.tuesday.short"),
+      t("weekday.wednsday.short"),
+      t("weekday.thursday.short"),
+      t("weekday.friday.short"),
+      t("weekday.saturday.short"),
+      t("weekday.sunday.short"),
+    ];
+  }, [i18n.language, t]);
   return (
     <MonthPaper square elevation={0}>
       <Grid container>

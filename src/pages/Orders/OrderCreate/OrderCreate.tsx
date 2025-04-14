@@ -20,8 +20,10 @@ import { useOrderValidation } from "../common/hooks/useOrderValidation";
 import { FieldElement } from "../common/components/OrderAttributes/OrderAttributes";
 import { Divider } from "@mui/material";
 import { PaperComponent } from "../common/components/PaperComponent/PaperComponent";
+import { useTranslation } from "react-i18next";
 
 export default function OrderCreate() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(true);
   const { order: currOrder, updateOrderInfo } = useCreatedOrderData();
   const { save: handleSave, close } = useOrderCreateActions(currOrder);
@@ -53,7 +55,7 @@ export default function OrderCreate() {
       aria-labelledby="draggable-dialog-title"
     >
       <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-        Новый заказ
+        {t("order.create.title")}
       </DialogTitle>
       <Divider />
       <DialogContent>
@@ -68,9 +70,9 @@ export default function OrderCreate() {
       <Divider />
       <DialogActions>
         <Button autoFocus onClick={close}>
-          Отмена
+          {t("order.create.cancelBtn")}
         </Button>
-        <Button onClick={handleSave}>Создать</Button>
+        <Button onClick={handleSave}>{t("order.create.saveBtn")}</Button>
       </DialogActions>
     </Dialog>
   );

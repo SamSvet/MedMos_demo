@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-pascal-case */
 import {
+  MRT_Localization,
   MRT_ShowHideColumnsButton,
   MRT_ToggleFiltersButton,
-  MRT_ToggleFullScreenButton,
   MaterialReactTable,
   useMaterialReactTable,
 } from "material-react-table";
@@ -15,11 +15,17 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import { useCallback } from "react";
 import { MRT_Localization_RU } from "material-react-table/locales/ru";
+import { MRT_Localization_EN } from "material-react-table/locales/en";
 import { LIST_FILTER_DATA_DEFAULT } from "../../constants/sd-fd";
 import { useOrderScreensLogic } from "./OrdersScreen.logic";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import { useTranslation } from "react-i18next";
 
+interface LocaleDict {
+  [locale_code: string]: MRT_Localization;
+}
 const OrdersTable = () => {
+  const { t, i18n } = useTranslation();
   const {
     viewdata,
     filters,
@@ -37,6 +43,11 @@ const OrdersTable = () => {
     total,
     downloadPdf,
   } = useOrderListLogic();
+
+  const tableLocale: LocaleDict = {
+    ru: MRT_Localization_RU,
+    us: MRT_Localization_EN,
+  };
 
   const { showCreateOrder, viewOrder } = useOrderScreensLogic(
     { page: mrtpagination.pageIndex, count: mrtpagination.pageSize },
@@ -97,7 +108,7 @@ const OrdersTable = () => {
         textOverflow: "ellipsis",
       },
     }),
-    localization: { ...MRT_Localization_RU },
+    localization: { ...(tableLocale[i18n.language] || MRT_Localization_RU) },
 
     muiTablePaperProps: ({ table }) => ({
       style: {
@@ -106,7 +117,7 @@ const OrdersTable = () => {
     }),
     renderToolbarInternalActions: ({ table }) => (
       <Box sx={{ width: "100%" }}>
-        <Tooltip title="Поиск">
+        <Tooltip title={t("table.toolbar.searchBtn")}>
           <IconButton onClick={handleSearchClick}>
             <SearchIcon />
           </IconButton>
@@ -114,7 +125,6 @@ const OrdersTable = () => {
 
         <MRT_ToggleFiltersButton table={table} />
         <MRT_ShowHideColumnsButton table={table} />
-        {/* <MRT_ToggleFullScreenButton table={table} /> */}
       </Box>
     ),
     renderTopToolbarCustomActions: ({ table }) => {
@@ -129,18 +139,18 @@ const OrdersTable = () => {
             },
           }}
         >
-          <Tooltip title="Создать новый заказ">
+          <Tooltip title={t("table.toolbar.addNewOrderBtn")}>
             <IconButton color="primary" onClick={showCreateOrder}>
               <AddCircleOutlinedIcon />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Очистить сортировку">
+          <Tooltip title={t("table.toolbar.clearSortBtn")}>
             <IconButton onClick={() => clearSorting(table)}>
               <SyncAltIcon sx={{ transform: "rotate(-90deg)" }} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Очистить фильтр">
+          <Tooltip title={t("table.toolbar.clearFilterBtn")}>
             <IconButton
               onClick={() => {
                 clearFilters(table);
@@ -152,7 +162,7 @@ const OrdersTable = () => {
           </Tooltip>
 
           <Box ml={5}>
-            <Tooltip title="Скачать все заказы">
+            <Tooltip title={t("table.toolbar.downloadOrderBtn")}>
               <IconButton onClick={downloadPdf} color="success">
                 <InsertDriveFileIcon />
               </IconButton>
