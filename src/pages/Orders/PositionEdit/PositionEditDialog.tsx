@@ -59,7 +59,7 @@ export const PositionEditDialog = () => {
       aria-labelledby="draggable-dialog-title"
     >
       <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-        Создание новой группы позиций
+        {t("order.split.title")}
       </DialogTitle>
       <Divider />
       <DialogContent>
@@ -88,17 +88,14 @@ export const PositionEditDialog = () => {
           <Grid item xs={6}>
             <FieldElement attr={positionAttributes.get("count")!} />
           </Grid>
-          {/* <Grid item xs={6}>
-              <FieldElement attr={positionAttributes.get("plan_delivery_dt")!} />
-            </Grid> */}
         </Grid>
       </DialogContent>
       <Divider />
       <DialogActions>
         <Button autoFocus onClick={cancel}>
-          Отмена
+          {t("common.cancelBtn")}
         </Button>
-        <Button onClick={save}>Редактировать</Button>
+        <Button onClick={save}>{t("common.editBtn")}</Button>
       </DialogActions>
     </Dialog>
   );

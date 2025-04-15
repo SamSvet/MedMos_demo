@@ -81,7 +81,7 @@ export const PositionReserveDialog = () => {
           right={10}
           // color={"white"}
         />
-        <Typography variant="h5">Резервирование позиций </Typography>
+        <Typography variant="h5">{t("order.reserve.title")}</Typography>
 
         <Grid container spacing={1.5}>
           <Grid item container xs={12}>
@@ -184,9 +184,9 @@ export const PositionReserveDialog = () => {
       <Divider />
       <DialogActions>
         <Button autoFocus onClick={cancel}>
-          Отмена
+          {t("common.cancelBtn")}
         </Button>
-        <Button onClick={save}>Редактировать</Button>
+        <Button onClick={save}>{t("common.editBtn")}</Button>
       </DialogActions>
     </Dialog>
   );

@@ -16,6 +16,8 @@ const resources = {
         collapseBtn: "Свернуть",
         cancelBtn: "Отмена",
         saveBtn: "Создать",
+        maxTitle: "максимум",
+        minTitle: "минимум",
       },
       order: {
         create: {
@@ -46,6 +48,12 @@ const resources = {
           title: "Редактирование заказа",
           updated: "Дата обновления",
           manager: "Менеджер",
+        },
+        split: {
+          title: "Создание новой группы позиций",
+        },
+        reserve: {
+          title: "Резервирование позиций",
         },
       },
       position: {
@@ -163,6 +171,8 @@ const resources = {
         collapseBtn: "Collapse",
         cancelBtn: "Cancel",
         saveBtn: "Save",
+        maxTitle: "max",
+        minTitle: "min",
       },
       order: {
         create: {
@@ -193,6 +203,12 @@ const resources = {
           title: "Edit Order",
           updated: "Date of Update",
           manager: "Manager",
+        },
+        split: {
+          title: "Split Order",
+        },
+        reserve: {
+          title: "Reserve Positions",
         },
       },
       position: {

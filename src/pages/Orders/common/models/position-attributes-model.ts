@@ -118,7 +118,7 @@ export const usePositionAttributesModel = (
             errorText: positionErrors?.count?.errorText,
             ...fieldsConstraints["count"],
             ...(basePosition?.count && {
-              helperText: `${basePosition?.count || 0} максимум`,
+              helperText: `${basePosition?.count || 0} ${t("common.maxTitle")}`,
             }),
           },
         ],
@@ -135,7 +135,7 @@ export const usePositionAttributesModel = (
             errorText: positionErrors?.count?.errorText,
             ...fieldsConstraints["reserved_count"],
             ...(basePosition?.count && {
-              helperText: `${basePosition?.count || 0}  максимум`,
+              helperText: `${basePosition?.count || 0}  ${t("common.maxTitle")}`,
             }),
           },
         ],
