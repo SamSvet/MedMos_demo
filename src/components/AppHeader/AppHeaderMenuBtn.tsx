@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -36,6 +37,7 @@ interface AppHeaderMenuBtnProps {
 }
 
 const AppHeaderMenuBtn: FC<AppHeaderMenuBtnProps> = ({ handleClick }) => {
+  const { t } = useTranslation();
   return (
     <Button
       variant="contained"
@@ -48,7 +50,7 @@ const AppHeaderMenuBtn: FC<AppHeaderMenuBtnProps> = ({ handleClick }) => {
         />
       }
     >
-      Светличная Елизавета
+      {t("user.firstName")}
     </Button>
   );
 };

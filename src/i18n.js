@@ -7,6 +7,9 @@ const resources = {
       refs: {
         noResults: "Нет опций",
       },
+      user: {
+        firstName: "Елизавета",
+      },
       common: {
         notAvailableField: "Не доступно для выбора",
         addOptionTitle: "Добавить",
@@ -161,6 +164,9 @@ const resources = {
     translation: {
       refs: {
         noResults: "No options",
+      },
+      user: {
+        firstName: "Elizaveta",
       },
       common: {
         notAvailableField: "Not available for selection",
