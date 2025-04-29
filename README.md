@@ -3,7 +3,6 @@
 ## Overview
 
 This is a demo version of a CRUD application for tracking and managing orders build with [React](https://react.dev/), [Redux](https://redux.js.org/), [MUI](https://mui.com/). The application is part of a pilot project for supply planning at [MedMos](https://med-mos.ru/).
-This is a CRUD order tracking and management application built on React, Redux, MUI technology stack.
 
 ## Usage
 
@@ -11,25 +10,25 @@ The main page is a list of orders grouped by main attributes. The list is implem
 
 <p align="center">
 <img src="https://private-user-images.githubusercontent.com/64905854/437084920-388e5e48-5b6d-464e-92c7-458119b3995d.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5MzcyOTgsIm5iZiI6MTc0NTkzNjk5OCwicGF0aCI6Ii82NDkwNTg1NC80MzcwODQ5MjAtMzg4ZTVlNDgtNWI2ZC00NjRlLTkyYzctNDU4MTE5YjM5OTVkLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE0Mjk1OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWMwOWNjMGFmNzdjODc1OTc4YjY4YWM4ZWNjZjY0ZGUxYjQxNjU3NmNjZGJjM2VhMWM5NDlmMGEwMmZkMGRkMjAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.nqTWk13nTejQhia2Cx9aWhxUj-VbGskNU0OLmICooDc">
-</p>
+</p><br/>
 
 New orders are created by exporting json files with format and content verification of the uploaded data.
 
 <p align="center">
 <img src="https://private-user-images.githubusercontent.com/64905854/437085078-63b00aa4-2944-44f2-960b-cd8fc7b63437.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5Mzg1NDUsIm5iZiI6MTc0NTkzODI0NSwicGF0aCI6Ii82NDkwNTg1NC80MzcwODUwNzgtNjNiMDBhYTQtMjk0NC00NGYyLTk2MGItY2Q4ZmM3YjYzNDM3LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE0NTA0NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTIxOTdmZDdjZmY1MDIxZTkyMWE0NjdmNjE5NDNiOTRhOWY2OWNjZjYxNzg4YjU5NjQ1MjA5NTg0N2QzYThkOWImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.uDaclXlXZWXvHI8hgao6HEJIrkEthNiRY-wwa0sffk8">
-</p>
+</p><br/>
 
 Viewing the details of a specific order is implemented through a separate application page, where you can add new items and reference values.
 
 <p align="center">
 <img src="https://private-user-images.githubusercontent.com/64905854/437085191-86ef14b6-ce5b-4efb-ab8c-e77e0aa9a89a.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5MzkxOTgsIm5iZiI6MTc0NTkzODg5OCwicGF0aCI6Ii82NDkwNTg1NC80MzcwODUxOTEtODZlZjE0YjYtY2U1Yi00ZWZiLWFiOGMtZTc3ZTBhYTlhODlhLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE1MDEzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTViZjAxYTEyNjQyNjkyM2Q3Y2QzNzNiZTU5M2U5ZGMxODBkY2E5ZjhmNGE5MjcyMThkMDlmNzg2NTE2YzMzN2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.8mZJqh8ncSbxzbkeiEMJ1XrRjJnZykmSEMmb4mpiId8">
-</p>
+</p><br/>
 
 The user has the ability to edit the delivery status and reserve individual items on the stock.
 
 <p align="center">
 <img src="https://private-user-images.githubusercontent.com/64905854/437085352-49a379a0-f2b3-4ff2-9972-2370193b555a.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5NDE0MDcsIm5iZiI6MTc0NTk0MTEwNywicGF0aCI6Ii82NDkwNTg1NC80MzcwODUzNTItNDlhMzc5YTAtZjJiMy00ZmYyLTk5NzItMjM3MDE5M2I1NTVhLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE1MzgyN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ5ZjI4OTQxYjdkY2RjMWQzMGEwZDJmY2VhZjBjY2ExMGU3MTk2MmZjM2U5ODFkZmUzNjg0NTgxZGM5MDY0N2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.OQLKEgctResuYX0tcViGlAtVnEAZXmHLYjIxW_BlAkk">
-</p>
+</p><br/>
 
 For further analysis and order planning, it is possible to download data as an Excel file.
 
