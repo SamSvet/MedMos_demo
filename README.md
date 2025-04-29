@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# MedMos demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This is a demo version of a CRUD application for tracking and managing orders build with [React](https://react.dev/), [Redux](https://redux.js.org/), [MUI](https://mui.com/). The application is part of a pilot project for supply planning at [MedMos](https://med-mos.ru/).
+This is a CRUD order tracking and management application built on React, Redux, MUI technology stack.
 
-In the project directory, you can run:
+## Usage
 
-### `npm start`
+The main page is a list of orders grouped by main attributes. The list is implemented as a [Material React Table](https://v2.material-react-table.com/)-based view with server sorting, filtering and pagination.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<p align="center">
+<img src="https://private-user-images.githubusercontent.com/64905854/437084920-388e5e48-5b6d-464e-92c7-458119b3995d.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5MzcyOTgsIm5iZiI6MTc0NTkzNjk5OCwicGF0aCI6Ii82NDkwNTg1NC80MzcwODQ5MjAtMzg4ZTVlNDgtNWI2ZC00NjRlLTkyYzctNDU4MTE5YjM5OTVkLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE0Mjk1OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWMwOWNjMGFmNzdjODc1OTc4YjY4YWM4ZWNjZjY0ZGUxYjQxNjU3NmNjZGJjM2VhMWM5NDlmMGEwMmZkMGRkMjAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.nqTWk13nTejQhia2Cx9aWhxUj-VbGskNU0OLmICooDc">
+</p>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+New orders are created by exporting json files with format and content verification of the uploaded data.
 
-### `npm test`
+<p align="center">
+<img src="https://private-user-images.githubusercontent.com/64905854/437085078-63b00aa4-2944-44f2-960b-cd8fc7b63437.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5Mzg1NDUsIm5iZiI6MTc0NTkzODI0NSwicGF0aCI6Ii82NDkwNTg1NC80MzcwODUwNzgtNjNiMDBhYTQtMjk0NC00NGYyLTk2MGItY2Q4ZmM3YjYzNDM3LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE0NTA0NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTIxOTdmZDdjZmY1MDIxZTkyMWE0NjdmNjE5NDNiOTRhOWY2OWNjZjYxNzg4YjU5NjQ1MjA5NTg0N2QzYThkOWImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.uDaclXlXZWXvHI8hgao6HEJIrkEthNiRY-wwa0sffk8">
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Viewing the details of a specific order is implemented through a separate application page, where you can add new items and reference values.
 
-### `npm run build`
+<p align="center">
+<img src="https://private-user-images.githubusercontent.com/64905854/437085191-86ef14b6-ce5b-4efb-ab8c-e77e0aa9a89a.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5MzkxOTgsIm5iZiI6MTc0NTkzODg5OCwicGF0aCI6Ii82NDkwNTg1NC80MzcwODUxOTEtODZlZjE0YjYtY2U1Yi00ZWZiLWFiOGMtZTc3ZTBhYTlhODlhLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE1MDEzOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTViZjAxYTEyNjQyNjkyM2Q3Y2QzNzNiZTU5M2U5ZGMxODBkY2E5ZjhmNGE5MjcyMThkMDlmNzg2NTE2YzMzN2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.8mZJqh8ncSbxzbkeiEMJ1XrRjJnZykmSEMmb4mpiId8">
+</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The user has the ability to edit the delivery status and reserve individual items on the stock.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p align="center">
+<img src="https://private-user-images.githubusercontent.com/64905854/437085352-49a379a0-f2b3-4ff2-9972-2370193b555a.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5NDE0MDcsIm5iZiI6MTc0NTk0MTEwNywicGF0aCI6Ii82NDkwNTg1NC80MzcwODUzNTItNDlhMzc5YTAtZjJiMy00ZmYyLTk5NzItMjM3MDE5M2I1NTVhLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE1MzgyN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ5ZjI4OTQxYjdkY2RjMWQzMGEwZDJmY2VhZjBjY2ExMGU3MTk2MmZjM2U5ODFkZmUzNjg0NTgxZGM5MDY0N2YmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.OQLKEgctResuYX0tcViGlAtVnEAZXmHLYjIxW_BlAkk">
+</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For further analysis and order planning, it is possible to download data as an Excel file.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="center">
+<img src="https://private-user-images.githubusercontent.com/64905854/437085516-69a3a694-1104-4e68-a585-77579da19b9c.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDU5NDE1NjEsIm5iZiI6MTc0NTk0MTI2MSwicGF0aCI6Ii82NDkwNTg1NC80MzcwODU1MTYtNjlhM2E2OTQtMTEwNC00ZTY4LWE1ODUtNzc1NzlkYTE5YjljLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDI5VDE1NDEwMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE2ZTFmZDBjMWI0NzQ3NWZhMDc2NWZlYzY5OTA3NWIwMzIxOTI5MDBlNDYyNDE4ZTczZWNlYTQwMDQ0Nzc5ZTQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.6SGniFL3Ey-8OTxTF9Z0VdEAl5hcsT3-s1f0U9t95Xs">
+</p>
